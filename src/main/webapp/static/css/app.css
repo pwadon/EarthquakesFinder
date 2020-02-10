@@ -25,7 +25,10 @@ html, body {
 }
 
 header {color:white;}
-footer {color:white;}
+footer {background-color:#18BC9C;
+        bottom: 0;
+        height: 50px;
+        width: 100%;}
 .nav {background:#eee;}
 
 .nav ul {
