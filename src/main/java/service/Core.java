@@ -11,9 +11,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Core {
-
-
-    private final static  int RadiusOfEarth =6371;
     private EarthQuakesDataFromJSON earthQuakesDataFromJSON = new EarthQuakesDataFromJSON();
     private List<Earthquake> earthquakeList = new ArrayList<>();
 
@@ -26,19 +23,11 @@ public class Core {
      * @throws JSONException
      */
     protected List<Earthquake> tenClosestEarthquakes( double latitudeOfTheCity , double longitudeOfTheCity ) throws IOException, JSONException {
-
         earthquakeList = earthQuakesDataFromJSON.earthquakeList();
         List<Earthquake> top10ClosestEarthquakes;
 
-        for (Earthquake earthquake: earthquakeList) {
-            earthquake.setDistanceFromGivenPoint(calculateDistance(latitudeOfTheCity, earthquake.getLatitude(), longitudeOfTheCity, earthquake.getLongtitude()));
-        }
-
-        top10ClosestEarthquakes =earthquakeList.stream()
-                .filter(distinctByKey(Earthquake::getDistanceFromGivenPoint))
-                .sorted(Comparator.comparingDouble(Earthquake::getDistanceFromGivenPoint))
-                .limit(10)
-                .collect(Collectors.toList());
+        setDistance(earthquakeList,latitudeOfTheCity,longitudeOfTheCity);
+        top10ClosestEarthquakes =top10Earthquakes(earthquakeList);
 
         return top10ClosestEarthquakes;
     }
@@ -51,7 +40,7 @@ public class Core {
      * @param earthquakeLongtitude
      * @return
      */
-    protected static double calculateDistance(double cityLatitude, double earthquakeLatitude, double cityLongtitude, double earthquakeLongtitude){
+    private double calculateDistance(double cityLatitude, double earthquakeLatitude, double cityLongtitude, double earthquakeLongtitude){
 
         double latDistance = Math.toRadians(earthquakeLatitude - cityLatitude);
         double lonDistance = Math.toRadians(earthquakeLongtitude - cityLongtitude);
@@ -64,7 +53,8 @@ public class Core {
 
         double distance2 = 2 * Math.atan2(Math.sqrt(distance1), Math.sqrt(1 - distance1));
 
-        return (int) (Math.round(RadiusOfEarth * distance2));
+        int radiusOfEarth = 6371;
+        return (int) (Math.round(radiusOfEarth * distance2));
 
     }
 
@@ -74,9 +64,42 @@ public class Core {
      * @param <T>
      * @return
      */
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    private <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
     {
         Map<Object, Boolean> map = new ConcurrentHashMap<>();
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
+    /**
+     * Getting 10 earthquakes with the lowest distance
+     * @param earthquakes
+     * @return
+     */
+    private List<Earthquake> top10Earthquakes(List<Earthquake> earthquakes){
+        List <Earthquake> top10Earthquakes;
+
+        top10Earthquakes = earthquakes.stream()
+                .filter(distinctByKey(Earthquake::getDistanceFromGivenPoint))
+                .sorted(Comparator.comparingDouble(Earthquake::getDistanceFromGivenPoint))
+                .limit(10)
+                .collect(Collectors.toList());
+
+        return top10Earthquakes;
+    }
+
+    /**
+     * Set Distance from given point to every earthquake on the list
+     * @param earthquakes
+     * @param latitudeOfTheCity
+     * @param longitudeOfTheCity
+     * @return
+     */
+    private List<Earthquake> setDistance(List <Earthquake> earthquakes, double latitudeOfTheCity, double longitudeOfTheCity){
+
+        for (Earthquake earthquake: earthquakes) {
+            earthquake.setDistanceFromGivenPoint(calculateDistance(latitudeOfTheCity, earthquake.getLatitude(), longitudeOfTheCity, earthquake.getLongtitude()));
+        }
+
+        return  earthquakes;
     }
 }
