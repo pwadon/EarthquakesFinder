@@ -22,7 +22,7 @@ public class Core {
      * @throws IOException
      * @throws JSONException
      */
-    protected List<Earthquake> tenClosestEarthquakes( double latitudeOfTheCity , double longitudeOfTheCity ) throws IOException, JSONException {
+     List<Earthquake> tenClosestEarthquakes( double latitudeOfTheCity , double longitudeOfTheCity ) throws IOException, JSONException {
         earthquakeList = earthQuakesDataFromJSON.earthquakeList();
         List<Earthquake> top10ClosestEarthquakes;
 
@@ -64,7 +64,7 @@ public class Core {
      * @param <T>
      * @return
      */
-    private <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    private static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
     {
         Map<Object, Boolean> map = new ConcurrentHashMap<>();
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
@@ -75,7 +75,7 @@ public class Core {
      * @param earthquakes
      * @return
      */
-    private List<Earthquake> top10Earthquakes(List<Earthquake> earthquakes){
+    public static List<Earthquake> top10Earthquakes(List<Earthquake> earthquakes){
         List <Earthquake> top10Earthquakes;
 
         top10Earthquakes = earthquakes.stream()
