@@ -1,14 +1,10 @@
 package packages.model;
 
-
-import java.util.List;
-
 public class Earthquake {
 
     protected int id;
     protected double latitude, longtitude, distanceFromGivenPoint;
     protected String title;
-    protected List<Earthquake> earthquakeList;
     private static int count =0;
 
     public Earthquake(double latitude, double longtitude, String title) {
@@ -62,11 +58,15 @@ public class Earthquake {
         this.distanceFromGivenPoint = distanceFromGivenPoint;
     }
 
-    public List<Earthquake> getEarthquakeList() {
-        return earthquakeList;
-    }
 
-    public void setEarthquakeList(List<Earthquake> earthquakeList) {
-        this.earthquakeList = earthquakeList;
+    @Override
+    public String toString() {
+        return "Earthquake{" +
+                "id=" + id +
+                ", latitude=" + latitude +
+                ", longtitude=" + longtitude +
+                ", distanceFromGivenPoint=" + distanceFromGivenPoint +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

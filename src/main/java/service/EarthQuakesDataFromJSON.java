@@ -4,7 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import packages.model.Earthquake;
-
 import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -21,31 +20,22 @@ public class EarthQuakesDataFromJSON {
      */
     public List<Earthquake> earthquakeList() throws IOException, JSONException {
         JSONObject json = readJsonFromUrl("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson");
-        JSONArray jsonArray = json.getJSONArray("features");
+
         List<Earthquake> earthquakes = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject json2 =new  JSONObject(json.toString());
+            JSONArray array = json2.getJSONArray("features");
 
-            JSONObject object = jsonArray.getJSONObject(i);
+            for (int i = 0; i <array.length() ; i++) {
+                JSONObject p = array.getJSONObject(i).getJSONObject("properties");
+                JSONArray p2 =array.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
 
+                Earthquake earthquake = new Earthquake();
+                earthquake.setLatitude(p2.getDouble(0));
+                earthquake.setLongtitude(p2.getDouble(1));
+                earthquake.setTitle(p.getString("title"));
+                earthquakes.add(earthquake);
+            }
 
-            JSONObject object1 = object.getJSONObject("geometry");
-            JSONObject object2 = object.getJSONObject("properties");
-
-
-            String title = object2.getString("title");
-            JSONArray array = object1.getJSONArray("coordinates");
-
-
-            double longtitude = array.getDouble(0);
-            double latitude = array.getDouble(1);
-
-            Earthquake earthquake = new Earthquake();
-            earthquake.setLatitude(latitude);
-            earthquake.setLongtitude(longtitude);
-            earthquake.setTitle(title);
-
-            earthquakes.add(earthquake);
-        }
         return earthquakes;
     }
 
