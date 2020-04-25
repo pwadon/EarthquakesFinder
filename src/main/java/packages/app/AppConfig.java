@@ -13,6 +13,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import service.HomeService;
 
 import java.util.Locale;
 
@@ -55,7 +56,11 @@ public class AppConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         TilesViewResolver viewResolver = new TilesViewResolver();
         registry.viewResolver(viewResolver);
+    }
 
+    @Bean(name = "homeService")
+    public HomeService homeService(){
+        return new HomeService();
     }
 
 }

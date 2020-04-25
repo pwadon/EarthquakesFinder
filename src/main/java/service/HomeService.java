@@ -1,12 +1,16 @@
 package service;
 
 import org.json.JSONException;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import packages.model.Earthquake;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
+@Service
 public class HomeService {
 
     /**
