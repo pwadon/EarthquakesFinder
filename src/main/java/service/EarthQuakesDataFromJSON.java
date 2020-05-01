@@ -4,9 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import packages.model.Earthquake;
+import service.Abstract.DataFromJson;
+
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 

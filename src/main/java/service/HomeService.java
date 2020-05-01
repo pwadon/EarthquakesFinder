@@ -19,10 +19,10 @@ public class HomeService {
      * @param latitude
      * @param longtitude
      */
-    public void closestEarthquakes(HttpSession session, double latitude, double longtitude){
+    public void closestEarthquakes(HttpSession session, double latitude, double longtitude, List <Earthquake> earthquakes){
         try {
             Core core = new Core();
-            List<Earthquake> earthquakeList = core.tenClosestEarthquakes(latitude, longtitude);
+            List<Earthquake> earthquakeList = core.tenClosestEarthquakes(latitude, longtitude,earthquakes);
             session.setAttribute("earthquakeList",earthquakeList);
         }
         catch (IOException | JSONException e){e.printStackTrace();}

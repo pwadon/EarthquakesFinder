@@ -13,8 +13,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+import packages.model.Earthquake;
+import service.EarthQuakesDataFromJSON;
 import service.HomeService;
-
+import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -63,4 +66,13 @@ public class AppConfig implements WebMvcConfigurer {
         return new HomeService();
     }
 
+    @Bean(name = "earthquakesDataFromJson")
+    public EarthQuakesDataFromJSON earthQuakesDataFromJSON(){
+        return new EarthQuakesDataFromJSON();
+    }
+
+    @Bean(name = "earthquakesDataFromJsonList")
+    public List<Earthquake> earthQuakesDataFromJSONList() throws IOException{
+        return new EarthQuakesDataFromJSON().earthquakeList();
+    }
 }
