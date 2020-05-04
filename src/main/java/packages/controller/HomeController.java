@@ -17,13 +17,18 @@ import java.util.List;
 @RequestMapping("")
 public class HomeController {
 
-    @Autowired
-    EarthQuakesDataFromJSON earthQuakesDataFromJSON = new EarthQuakesDataFromJSON();
+    final
+    EarthQuakesDataFromJSON earthQuakesDataFromJSON;
 
-    @Autowired
+    final
     HomeService homeService;
 
     List<Earthquake> earthquakeList = new ArrayList<>();
+
+    public HomeController(EarthQuakesDataFromJSON earthQuakesDataFromJSON, HomeService homeService) {
+        this.earthQuakesDataFromJSON = earthQuakesDataFromJSON;
+        this.homeService = homeService;
+    }
 
     /**
      * home page
