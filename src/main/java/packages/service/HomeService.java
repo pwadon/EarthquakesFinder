@@ -1,9 +1,7 @@
-package service;
+package packages.service;
 
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import packages.model.Earthquake;
 
@@ -14,7 +12,7 @@ import java.util.List;
 @Service
 public class HomeService {
 
-    private Core core;
+    private final Core core;
 
     @Autowired
     public HomeService(Core core) {

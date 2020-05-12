@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 
 @Configuration
-@ComponentScan("packages")
+@ComponentScan({"packages.service","packages.controller"})
 @EnableWebMvc
 public class FormatterConfig implements WebMvcConfigurer {
 
@@ -21,10 +21,4 @@ public class FormatterConfig implements WebMvcConfigurer {
         registrar.setUseIsoFormat(true);
         registrar.registerFormatters(registry);
     }
-
-
-
-
-
-
 }

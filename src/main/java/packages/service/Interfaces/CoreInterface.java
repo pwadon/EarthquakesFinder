@@ -1,4 +1,4 @@
-package service.Interfaces;
+package packages.service.Interfaces;
 
 import packages.model.Earthquake;
 

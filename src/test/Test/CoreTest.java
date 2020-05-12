@@ -3,7 +3,7 @@ package Test;
 import org.junit.Assert;
 import org.junit.Test;
 import packages.model.Earthquake;
-import service.Core;
+import packages.service.Core;
 
 import java.util.ArrayList;
 import java.util.List;

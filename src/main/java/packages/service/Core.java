@@ -1,17 +1,12 @@
-package service;
+package packages.service;
 
 import org.json.JSONException;
 import packages.model.Earthquake;
-import service.Interfaces.CoreInterface;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
-public class Core extends service.Abstract.Core {
+public class Core extends packages.service.Abstract.Core {
 
     /**
      * creating list of top 10 closest earthquakes in previous 30 days to given latitude and longtitude of chosen location

@@ -14,9 +14,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import packages.model.Earthquake;
-import service.Core;
-import service.EarthQuakesDataFromJSON;
-import service.HomeService;
+import packages.service.Core;
+import packages.service.EarthQuakesDataFromJSON;
+import packages.service.HomeService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
@@ -65,11 +65,6 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean(name = "homeService")
     public HomeService homeService(Core core){
         return new HomeService(core);
-    }
-
-    @Bean(name = "earthquakesDataFromJson")
-    public EarthQuakesDataFromJSON earthQuakesDataFromJSON(){
-        return new EarthQuakesDataFromJSON();
     }
 
     @Bean(name = "earthquakesDataFromJsonList")

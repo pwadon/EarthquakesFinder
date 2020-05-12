@@ -1,7 +1,7 @@
-package service.Abstract;
+package packages.service.Abstract;
 
 import packages.model.Earthquake;
-import service.Interfaces.CoreInterface;
+import packages.service.Interfaces.CoreInterface;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,13 +15,14 @@ public abstract class Core implements CoreInterface {
 
     final int radiusOfEarth = 6371;
     /**
-     * Calculating distance between 2 points with latitudes and lenghtitudes returning distance in kms
+     * Calculating distance between 2 points with latitudes and longtitudes returning distance in kms
      * @param cityLatitude
      * @param earthquakeLatitude
      * @param cityLongtitude
      * @param earthquakeLongtitude
      * @return
      */
+    //obiekt miasta i obiekt wspolrzednych trzesienia
     public double calculateDistance(double cityLatitude, double earthquakeLatitude, double cityLongtitude, double earthquakeLongtitude){
 
         double latDistance = Math.toRadians(earthquakeLatitude - cityLatitude);
