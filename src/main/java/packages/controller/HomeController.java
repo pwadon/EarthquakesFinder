@@ -33,8 +33,9 @@ public class HomeController {
      * @return home page
      */
     @RequestMapping
-    public String home () throws  IOException{
-        earthquakeList = earthQuakesDataFromJSON.earthquakeList();
+    public String home(){
+        Thread earthquakeListThread = new Thread(()-> earthquakeList = earthQuakesDataFromJSON.earthquakeList());
+        earthquakeListThread.start();
         return "home";
     }
 

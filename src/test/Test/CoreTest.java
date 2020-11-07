@@ -22,19 +22,15 @@ public class CoreTest {
         earthquakeList = new ArrayList<>();
         core = new Core();
     }
-    @Test
-    public void tenClosestEarthquakes() {
-    }
+
 
     @Test
     public void calculateDistance() {
     }
 
-    /**
-     * Testing correct list sorting.
-     */
+
     @Test
-    public void top10EarthquakesTest(){
+    public void top10ClosestEarthquakesTest(){
 
         for (int i = 0; i <20 ; i++) {
             Earthquake earthquake = new Earthquake();

@@ -46,6 +46,8 @@ public class Earthquake {
         this.distanceFromGivenPoint = distanceFromGivenPoint;
     }
 
+
+
     @Override
     public String toString() {
         return "Earthquake{" +

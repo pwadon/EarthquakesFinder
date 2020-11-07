@@ -16,22 +16,24 @@ public class EarthQuakesDataFromJSON extends DataFromJson {
     /**
      * Creating list of earthquakes on earth in last 30 days from :  https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson
      * @return
-     * @throws IOException
-     * @throws JSONException
      */
-    public List<Earthquake> earthquakeList() throws IOException, JSONException {
+    public List<Earthquake> earthquakeList()  {
 
         List<Earthquake> earthquakes = new ArrayList<>();
-            JSONObject json2 =new  JSONObject(readJsonFromUrl("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").toString());
+        try {
+            JSONObject json2 = new JSONObject(readJsonFromUrl("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson").toString());
             JSONArray array = json2.getJSONArray("features");
 
-            for (int i = 0; i <array.length() ; i++) {
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject p = array.getJSONObject(i).getJSONObject("properties");
-                JSONArray p2 =array.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
+                JSONArray p2 = array.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
 
-                Earthquake earthquake = new Earthquake(p2.getDouble(0),p2.getDouble(1),p.getString("title"));
+                Earthquake earthquake = new Earthquake(p2.getDouble(0), p2.getDouble(1), p.getString("title"));
                 earthquakes.add(earthquake);
             }
+        }catch (JSONException | IOException jsonIoException){
+            jsonIoException.printStackTrace();
+        }
         return earthquakes;
     }
 }
