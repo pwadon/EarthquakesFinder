@@ -1,11 +1,13 @@
 package packages.service;
 
 import org.json.JSONException;
+import org.springframework.stereotype.Component;
 import packages.model.Earthquake;
 
 import java.io.IOException;
 import java.util.*;
 
+@Component
 public class Core extends packages.service.Abstract.Core {
 
     /**
@@ -21,7 +23,7 @@ public class Core extends packages.service.Abstract.Core {
         List<Earthquake> top10ClosestEarthquakes;
 
         setDistance(earthquakes,latitudeOfTheCity,longitudeOfTheCity);
-        top10ClosestEarthquakes =top10Earthquakes(earthquakes);
+        top10ClosestEarthquakes = top10Earthquakes(earthquakes);
 
         return top10ClosestEarthquakes;
     }

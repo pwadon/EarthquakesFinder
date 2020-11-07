@@ -1,5 +1,6 @@
 package packages.app;
 
+import org.apache.log4j.BasicConfigurator;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -24,6 +25,7 @@ public class AppInitializer implements WebApplicationInitializer {
         servlet.setLoadOnStartup(1);
         servlet.addMapping("/");
 
+        BasicConfigurator.configure();
     }
 
 }

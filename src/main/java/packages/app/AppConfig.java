@@ -61,19 +61,4 @@ public class AppConfig implements WebMvcConfigurer {
         TilesViewResolver viewResolver = new TilesViewResolver();
         registry.viewResolver(viewResolver);
     }
-
-    @Bean(name = "homeService")
-    public HomeService homeService(Core core){
-        return new HomeService(core);
-    }
-
-    @Bean(name = "earthquakesDataFromJsonList")
-    public List<Earthquake> earthQuakesDataFromJSONList() throws IOException{
-        return new EarthQuakesDataFromJSON().earthquakeList();
-    }
-
-    @Bean(name = "core")
-    public Core core() {
-        return new Core();
-    }
 }

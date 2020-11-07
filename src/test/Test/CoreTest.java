@@ -1,7 +1,9 @@
 package Test;
 
-import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import packages.model.Earthquake;
 import packages.service.Core;
 
@@ -12,10 +14,16 @@ import static org.junit.Assert.*;
 
 public class CoreTest {
 
+    private List <Earthquake> earthquakeList;
+    private Core core;
+
+    @Before
+    public void setup(){
+        earthquakeList = new ArrayList<>();
+        core = new Core();
+    }
     @Test
     public void tenClosestEarthquakes() {
-
-
     }
 
     @Test
@@ -28,8 +36,6 @@ public class CoreTest {
     @Test
     public void top10EarthquakesTest(){
 
-        List <Earthquake> earthquakeList = new ArrayList<>();
-
         for (int i = 0; i <20 ; i++) {
             Earthquake earthquake = new Earthquake();
             Earthquake earthquake1 = new Earthquake();
@@ -39,7 +45,7 @@ public class CoreTest {
             earthquakeList.add(earthquake1);
         }
 
-        earthquakeList= Core.top10Earthquakes(earthquakeList);
+        earthquakeList= core.top10Earthquakes(earthquakeList);
 
         List<Earthquake> earthquakeList2 = new ArrayList<>();
 

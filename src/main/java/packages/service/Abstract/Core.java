@@ -1,5 +1,6 @@
 package packages.service.Abstract;
 
+import org.springframework.stereotype.Component;
 import packages.model.Earthquake;
 import packages.service.Interfaces.CoreInterface;
 
@@ -10,6 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 
 public abstract class Core implements CoreInterface {
 
@@ -22,7 +24,6 @@ public abstract class Core implements CoreInterface {
      * @param earthquakeLongtitude
      * @return
      */
-    //obiekt miasta i obiekt wspolrzednych trzesienia
     public double calculateDistance(double cityLatitude, double earthquakeLatitude, double cityLongtitude, double earthquakeLongtitude){
 
         double latDistance = Math.toRadians(earthquakeLatitude - cityLatitude);
@@ -46,7 +47,7 @@ public abstract class Core implements CoreInterface {
      * @param <T>
      * @return
      */
-    private static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    private  <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
     {
         Map<Object, Boolean> map = new ConcurrentHashMap<>();
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
@@ -57,7 +58,7 @@ public abstract class Core implements CoreInterface {
      * @param earthquakes
      * @return
      */
-    public static List<Earthquake> top10Earthquakes(List<Earthquake> earthquakes){
+    public List<Earthquake> top10Earthquakes(List<Earthquake> earthquakes){
         List <Earthquake> top10Earthquakes;
 
         top10Earthquakes = earthquakes.stream()
@@ -77,10 +78,7 @@ public abstract class Core implements CoreInterface {
      * @return
      */
     public List<Earthquake> setDistance(List<Earthquake> earthquakes, double latitudeOfTheCity, double longitudeOfTheCity){
-
-        for (Earthquake earthquake: earthquakes) {
-            earthquake.setDistanceFromGivenPoint(calculateDistance(latitudeOfTheCity, earthquake.getLatitude(), longitudeOfTheCity, earthquake.getLongtitude()));
-        }
+         earthquakes.forEach(earthquake -> earthquake.setDistanceFromGivenPoint(calculateDistance(latitudeOfTheCity, earthquake.getLatitude(), longitudeOfTheCity, earthquake.getLongtitude())));
 
         return  earthquakes;
     }

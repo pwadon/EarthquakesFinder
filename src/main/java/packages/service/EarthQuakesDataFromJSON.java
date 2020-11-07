@@ -29,10 +29,7 @@ public class EarthQuakesDataFromJSON extends DataFromJson {
                 JSONObject p = array.getJSONObject(i).getJSONObject("properties");
                 JSONArray p2 =array.getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates");
 
-                Earthquake earthquake = new Earthquake();
-                earthquake.setLatitude(p2.getDouble(0));
-                earthquake.setLongtitude(p2.getDouble(1));
-                earthquake.setTitle(p.getString("title"));
+                Earthquake earthquake = new Earthquake(p2.getDouble(0),p2.getDouble(1),p.getString("title"));
                 earthquakes.add(earthquake);
             }
         return earthquakes;
